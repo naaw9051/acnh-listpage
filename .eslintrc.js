@@ -17,5 +17,6 @@ module.exports = {
     'object-shorthand': 'off',
     'func-names': 'off',
     'max-len': 'off',
+    'no-console': 'off',
   },
 };
