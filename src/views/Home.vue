@@ -3,7 +3,7 @@
     <HelloWorld msg="Add New Item"></HelloWorld>
     <b-tabs content-class="mt-3">
       <b-tab title="Items" active>
-        <b-form @submit="submitItem" @reset="resetItem">
+        <b-form @submit="submitItem" @reset="resetItem" noinvalidate>
           <b-form-group id="name-input-group" label="Item Name:" label-for="name-input">
             <b-form-input
               id="input-1"
@@ -27,7 +27,6 @@
             <b-form-input
               id="description-input"
               v-model="formItem.description"
-              required
               placeholder="Enter Description"
             ></b-form-input>
           </b-form-group>
@@ -41,6 +40,7 @@
               required
             ></b-form-radio-group>
           </b-form-group>
+          <p>{{formItem}}</p>
 
           <b-button type="submit" variant="primary" :disabled="checkItem(formItem.name)">Submit</b-button>
           <b-button type="reset" variant="danger">Reset</b-button>
@@ -59,7 +59,7 @@
           </b-form-group>
 
           <b-form-group id="price-input-group" label="Choose a date:" label-for="bday-input">
-            <b-form-datepicker id="datepicker-sm" class="bday-input" v-model="formBday.date" calendar-width="300px"></b-form-datepicker>
+            <b-form-datepicker id="datepicker-sm" class="bday-input" v-model="formBday.date" calendar-width="300px" required></b-form-datepicker>
           </b-form-group>
 
           <b-button type="submit" variant="primary" :disabled="checkItem(formBday.name)">Submit</b-button>
@@ -74,15 +74,12 @@
 </template>
 
 <script>
-import ListData from '../database/acnh-data.json';
+import axios from 'axios';
 import HelloWorld from '../components/HelloWorld.vue';
 
 export default {
   name: 'Home',
   components: { HelloWorld },
-  created() {
-    this.allItems = [...ListData.fish, ...ListData.insects, ...ListData.birthdays];
-  },
   data: function () {
     return {
       allItems: [],
@@ -99,24 +96,47 @@ export default {
       },
     };
   },
+  mounted() {
+    axios
+      .get(`${this.$backendhostname}/allItemsAsArray`)
+      .then((response) => {
+        this.allItems = response.data;
+      });
+  },
   methods: {
     submitItem() {
       // this.allItems.
       switch (this.formItem.type) {
         case 'Fish':
-          this.allItems.fishes.push(this.formItem);
+          axios
+            .post(`${this.$backendhostname}/fishes`, this.formItem)
+            .then((response) => {
+              console.log(response);
+            });
           break;
         case 'Insects':
-          this.allItems.insects.push(this.formItem);
+          axios
+            .post(`${this.$backendhostname}/insects`, this.formItem)
+            .then((response) => {
+              console.log(response);
+            });
           break;
         case 'Fossil':
-          this.allItems.fossils.push(this.formItem);
+          axios
+            .post(`${this.$backendhostname}/fossils`, this.formItem)
+            .then((response) => {
+              console.log(response);
+            });
           break;
         case 'Clothing':
-          this.allItems.clothing.push(this.formItem);
+          axios
+            .post(`${this.$backendhostname}/clothing`, this.formItem)
+            .then((response) => {
+              console.log(response);
+            });
           break;
         default:
-          // code block
+          console.log('Could not save Item');
       }
     },
     resetItem() {
@@ -128,7 +148,11 @@ export default {
       };
     },
     submitBday() {
-      this.allItems.birthdays.push(this.formBday);
+      axios
+        .post(`${this.$backendhostname}/birthdays`, this.formBday)
+        .then((response) => {
+          console.log(response);
+        });
     },
     resetBday() {
       this.formBday = {

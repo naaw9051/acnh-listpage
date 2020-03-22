@@ -28,18 +28,12 @@
 </template>
 
 <script>
-import ListData from '../database/acnh-data.json';
+import axios from 'axios';
 import HelloWorld from '../components/HelloWorld.vue';
 
 export default {
   name: 'Lists',
   components: { HelloWorld },
-  created() {
-    this.allItems = [...ListData.fish, ...ListData.insects, ...ListData.birthdays];
-    this.fishes = this.allItems.fish;
-    this.insects = this.allItems.insects;
-    this.birthdays = this.allItems.birthdays;
-  },
   data: function () {
     return {
       allItems: null,
@@ -47,6 +41,21 @@ export default {
       insects: null,
       birthdays: null,
     };
+  },
+  mounted() {
+    axios
+      .get(`${this.$backendhostname}/allItemsAsArray`)
+      .then((response) => {
+        this.allItems = response.data;
+      });
+
+    axios
+      .get(`${this.$backendhostname}/allItems`)
+      .then((response) => {
+        this.fishes = response.data.fishes;
+        this.insects = response.data.insects;
+        this.birthdays = response.data.birthdays;
+      });
   },
 };
 </script>

@@ -10,14 +10,18 @@
 </template>
 
 <script>
-import ListData from '../database/acnh-data.json';
+import axios from 'axios';
 import HelloWorld from '../components/HelloWorld.vue';
 
 export default {
   name: 'Search',
   components: { HelloWorld },
-  created() {
-    this.allItems = [...ListData.fish, ...ListData.insects, ...ListData.birthdays];
+  mounted() {
+    axios
+      .get(`${this.$backendhostname}/allItemsAsArray`)
+      .then((response) => {
+        this.allItems = response.data;
+      });
   },
   data: function () {
     return {
