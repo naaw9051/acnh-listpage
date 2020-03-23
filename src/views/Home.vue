@@ -82,7 +82,7 @@ export default {
   data: function () {
     return {
       allItems: [],
-      typeOptions: ['Fish', 'Insects', 'Fossil', 'Clothing'],
+      typeOptions: ['Fish', 'Insects', 'Fossil', 'Clothing', 'Shell'],
       formItem: {
         name: '',
         price: '',
@@ -130,6 +130,13 @@ export default {
         case 'Clothing':
           axios
             .post(`${this.$backendhostname}/clothing`, this.formItem)
+            .then((response) => {
+              console.log(response);
+            });
+          break;
+        case 'Shell':
+          axios
+            .post(`${this.$backendhostname}/shells`, this.formItem)
             .then((response) => {
               console.log(response);
             });
