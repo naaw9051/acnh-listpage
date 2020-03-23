@@ -18,5 +18,6 @@ module.exports = {
     'func-names': 'off',
     'max-len': 'off',
     'no-console': 'off',
+    'linebreak-style': 'windows',
   },
 };
