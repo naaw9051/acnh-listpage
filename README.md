@@ -1,5 +1,10 @@
 # acnh-listpage
 
+## Quick method
+
+If just wanna see/use this, go to this projects [GitPages](https://naaw9051.github.io/acnh-listpage).
+But you still need to [start the backend](https://github.com/naaw9051/acnh-backend).
+
 ## Prerequisites
 
 You need to install [NodeJS](https://nodejs.org/en/) to run this project.
