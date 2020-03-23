@@ -25,7 +25,7 @@ export default {
   },
   data: function () {
     return {
-      allData: null,
+      allItems: null,
       results: [],
       searchInput: null,
       showResults: false,
@@ -33,9 +33,14 @@ export default {
   },
   methods: {
     search() {
-      if (this.searchInput.length > 0) {
+      if (this.searchInput.length > 1) {
+        this.results = [];
         const regex = new RegExp(this.searchInput, 'gi');
-        this.results = this.allData.filter((item) => item.name.match(regex));
+        this.allItems.forEach((item) => {
+          if (item.name.match(regex)) {
+            this.results.push(item);
+          }
+        });
         console.log(this.results);
       }
     },

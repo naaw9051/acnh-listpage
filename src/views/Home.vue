@@ -40,7 +40,6 @@
               required
             ></b-form-radio-group>
           </b-form-group>
-          <p>{{formItem}}</p>
 
           <b-button type="submit" variant="primary" :disabled="checkItem(formItem.name)">Submit</b-button>
           <b-button type="reset" variant="danger">Reset</b-button>
