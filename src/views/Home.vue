@@ -23,7 +23,7 @@
             ></b-form-input>
           </b-form-group>
 
-          <b-form-group id="description-input-group" label="Item Name:" label-for="description-input">
+          <b-form-group id="description-input-group" label="Description (optional):" label-for="description-input">
             <b-form-input
               id="description-input"
               v-model="formItem.description"
