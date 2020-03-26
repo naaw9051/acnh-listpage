@@ -464,12 +464,7 @@ export default {
     //   .then((response) => {
     //     this.allItems = response.data;
     //   });
-    let databaseData = [];
-    Object.getOwnPropertyNames(this.staticData).forEach(key => {
-      let value = data[key];
-      databaseData.push(...value);
-    });
-    this.allItems = databaseData;
+    this.allItems = [...this.staticData.fishes, ...this.staticData.shells, ...this.staticData.birthdays, ...this.staticData.furniture, ...this.staticData.fossils, ...this.staticData.clothing, ...this.staticData.insects];
   },
   methods: {
     submitItem() {
