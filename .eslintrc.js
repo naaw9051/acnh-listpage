@@ -17,5 +17,7 @@ module.exports = {
     'object-shorthand': 'off',
     'func-names': 'off',
     'max-len': 'off',
+    'linebreak-style': 'off',
+    'comma-dangle': 'off',
   },
 };

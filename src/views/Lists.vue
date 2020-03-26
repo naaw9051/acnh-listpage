@@ -417,13 +417,7 @@ export default {
 
     //     this.allItems = response.data;
     //   });
-
-    let databaseData = [];
-    Object.getOwnPropertyNames(this.staticData).forEach(key => {
-      let value = data[key];
-      databaseData.push(...value);
-    });
-    this.allItems = databaseData;
+    this.allItems = [...this.staticData.fishes, ...this.staticData.shells, ...this.staticData.birthdays, ...this.staticData.furniture, ...this.staticData.fossils, ...this.staticData.clothing, ...this.staticData.insects];
 
     // axios
     //   .get(`${this.$backendhostname}/allItems`)
@@ -434,10 +428,10 @@ export default {
     //     this.shells = response.data.shells;
     //   });
 
-      this.fishes = this.staticData.fishes;
-      this.insects = this.staticData.insects;
-      this.birthdays = this.staticData.birthdays;
-      this.shells = this.staticData.shells;
+    this.fishes = this.staticData.fishes;
+    this.insects = this.staticData.insects;
+    this.birthdays = this.staticData.birthdays;
+    this.shells = this.staticData.shells;
   },
 };
 </script>
